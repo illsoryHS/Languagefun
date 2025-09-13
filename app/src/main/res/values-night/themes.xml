@@ -1,0 +1,46 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!--
+      Base.Theme.LanguageFun
+
+      Purpose:
+        Defines the base Material3 theme used by the app.
+        Inherits from Theme.Material3.DayNight.NoActionBar
+        so it automatically adapts between light and dark mode,
+        while removing the default ActionBar.
+
+      Key design choices:
+        • Transparent status bar; in this variant windowLightStatusBar = false
+          (so status bar icons/text appear light, suitable for dark backgrounds).
+        • Maps the app’s custom colors (md_theme_*) to Material3 theme attributes.
+        • Applies consistent rounded corners across small/medium/large components,
+          matching the Figma mockups’ playful style.
+        • BottomNavigationView inherits Material3 default styling and uses the surface color.
+    -->
+    <style name="Base.Theme.LanguageFun" parent="Theme.Material3.DayNight.NoActionBar">
+
+        <!-- Transparent status bar with light icons (for dark background UIs) -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
+
+        <!-- Core palette mapped to Material3 attributes -->
+        <item name="colorPrimary">@color/md_theme_primary</item>
+        <item name="colorOnPrimary">@color/md_theme_onPrimary</item>
+        <item name="colorSecondary">@color/md_theme_secondary</item>
+        <item name="colorOnSecondary">@color/md_theme_onSecondary</item>
+
+        <!-- Background and surface colors -->
+        <item name="android:colorBackground">@color/md_theme_background</item>
+        <item name="colorSurface">@color/md_theme_surface</item>
+        <item name="colorOnSurface">@color/md_theme_onSurface</item>
+        <item name="colorSurfaceVariant">@color/md_theme_surfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/md_theme_onSurfaceVariant</item>
+
+        <!-- Softer rounded corners for most components (closer to Figma design) -->
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Material3.Corner.Medium</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Material3.Corner.Medium</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.Material3.Corner.Medium</item>
+
+        <!-- Bottom navigation background follows the surface color -->
+        <item name="bottomNavigationStyle">@style/Widget.Material3.BottomNavigationView</item>
+    </style>
+</resources>

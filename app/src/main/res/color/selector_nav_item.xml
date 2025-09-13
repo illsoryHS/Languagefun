@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--
+        This is a ColorStateList defined in XML.
+        Purpose:
+        - Controls the tint color of UI elements (e.g., icons/text in BottomNavigationView)
+        - Changes color depending on whether the item is selected or not.
+    -->
+
+    <!-- Selected state (checked/tab active):
+         Uses the app’s primary theme color for emphasis -->
+    <item android:state_checked="true" android:color="?attr/colorPrimary" />
+
+    <!-- Default state (not selected):
+         Uses a weaker "onSurfaceVariant" color to de-emphasize -->
+    <item android:color="?attr/colorOnSurfaceVariant" />
+</selector>

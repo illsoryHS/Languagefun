@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  item_exercise.xml
+  Purpose:
+    - A simple vertical list row for the "Daily Exercises" section.
+    - Matches the mock: bold title + muted secondary line (duration).
+  Notes:
+    - Keep paddings consistent with course cards spacing for visual rhythm.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp">
+
+    <!-- Primary line: exercise title -->
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Practice Vocabulary"
+        android:textStyle="bold"
+        android:textSize="16sp" />
+
+    <!-- Secondary line: duration / info in a muted color -->
+    <TextView
+        android:id="@+id/tvDuration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="5 minutes"
+        android:textSize="12sp"
+        android:textColor="@color/grey_300" />
+</LinearLayout>

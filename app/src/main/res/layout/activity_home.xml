@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  activity_home.xml
+
+  Purpose:
+    Defines the layout of the Home screen. This screen contains:
+      - A headline + subtitle
+      - A language selector (Material3 dropdown)
+      - A horizontal list of "Popular Courses"
+      - A vertical list of "Daily Exercises"
+      - A bottom navigation bar (Home/Profile)
+
+  Design notes:
+    • Title/subtitle are centered to match the playful Figma mock.
+    • Language selector uses a filled box style for clarity.
+    • RecyclerViews have start/end padding; consistent spacing between items is handled
+      in code via SpacingItemDecoration.
+    • BottomNavigationView is transparent with no elevation, so it looks flat and modern.
+
+  Dependencies:
+    - Uses spacing values from res/values/dimens.xml (e.g., @dimen/space_24).
+    - Uses shared colors (e.g., @color/grey_100).
+-->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/space_24">
+
+    <!-- Headline text at the top -->
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose Your\n Adventure!"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:layout_marginTop="@dimen/space_24"
+        android:textAlignment="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Subtitle under the headline -->
+    <TextView
+        android:id="@+id/tvSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select a language to start learning."
+        android:textSize="16sp"
+        android:layout_marginTop="@dimen/space_8"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Language selector: Material Exposed Dropdown Menu -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilLanguage"
+        style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Select"
+        android:layout_marginTop="@dimen/space_16"
+        app:layout_constraintTop_toBottomOf="@id/tvSubtitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:endIconMode="dropdown_menu"
+        app:boxBackgroundMode="filled"
+        app:boxBackgroundColor="@color/grey_100"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusBottomEnd="12dp"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        app:boxStrokeColor="@android:color/transparent"
+        app:boxStrokeErrorColor="@android:color/transparent">
+
+        <!-- Actual dropdown field -->
+        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+            android:id="@+id/actvLanguage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none"
+            android:importantForAutofill="no" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Section title for the courses list -->
+    <TextView
+        android:id="@+id/tvPopular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Popular Courses"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_marginTop="@dimen/space_20"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@id/tilLanguage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Horizontal RecyclerView for course cards -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvCourses"
+        android:layout_width="0dp"
+        android:layout_height="190dp"
+        android:layout_marginTop="@dimen/space_12"
+        android:overScrollMode="never"
+        android:paddingStart="@dimen/space_16"
+        android:paddingEnd="@dimen/space_16"
+        android:clipToPadding="false"
+        app:layout_constraintTop_toBottomOf="@id/tvPopular"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Section title for the daily exercises -->
+    <TextView
+        android:id="@+id/tvDaily"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Daily Exercises"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_marginTop="@dimen/space_12"
+        app:layout_constraintTop_toBottomOf="@id/rvCourses"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Vertical RecyclerView for exercise items -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvExercises"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:overScrollMode="never"
+        android:paddingStart="@dimen/space_16"
+        android:paddingEnd="@dimen/space_16"
+        android:clipToPadding="false"
+        app:layout_constraintTop_toBottomOf="@id/tvDaily"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView" />
+
+    <!-- Bottom navigation bar with Home/Profile tabs -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        app:backgroundTint="@android:color/transparent"
+        android:elevation="0dp"
+        app:itemIconTint="@color/selector_nav_item"
+        app:itemTextColor="@color/selector_nav_item"
+        app:itemIconSize="24dp"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/bottom_nav_menu"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
