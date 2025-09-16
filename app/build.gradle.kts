@@ -55,12 +55,21 @@ dependencies {
     implementation(libs.lifecycle.viewmodel.ktx)
     implementation(libs.lifecycle.runtime.ktx)
 
+
     // Retrofit + Gson
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.gson)
 
     // OkHttp
     implementation(libs.okhttp.logging)
+
+    // Testing
+    testImplementation("io.mockk:mockk:1.13.12")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1")
+    // --- Robolectric for adapter/view inflation in unit tests ---
+    testImplementation("org.robolectric:robolectric:4.12.1")
+    testImplementation("androidx.test:core:1.5.0")
+
 }
 
 kapt {
