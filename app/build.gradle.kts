@@ -8,6 +8,7 @@ plugins {
 android {
     namespace = "com.example.languagefun"
     compileSdk = 36
+    buildFeatures { viewBinding = true }
 
     defaultConfig {
         applicationId = "com.example.languagefun"
@@ -44,6 +45,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity.ktx)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.activity)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
