@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
-    <!-- 顶部栏 -->
+    <!-- Top app bar with a centered title -->
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="0dp"
@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- 可滚动内容 -->
+    <!-- Scrollable content area -->
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scroll"
         android:layout_width="0dp"
@@ -38,6 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <!-- Card containing album/artist information -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -53,6 +54,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
+                    <!-- Album title -->
                     <TextView
                         android:id="@+id/tvTitle"
                         style="?attr/textAppearanceHeadlineSmall"
@@ -60,6 +62,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 
+                    <!-- Artist name -->
                     <TextView
                         android:id="@+id/tvSubtitle"
                         style="?attr/textAppearanceBodyMedium"
@@ -68,6 +71,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 
+                    <!-- Album genre -->
                     <TextView
                         android:id="@+id/tvGenre"
                         style="?attr/textAppearanceBodyMedium"
@@ -76,6 +80,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 
+                    <!-- Track count -->
                     <TextView
                         android:id="@+id/tvTracks"
                         style="?attr/textAppearanceBodyMedium"
@@ -87,14 +92,14 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-
+            <!-- Divider separating header info from description -->
             <com.google.android.material.divider.MaterialDivider
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="12dp" />
 
-            <!-- 描述正文 -->
+            <!-- Album description -->
             <TextView
                 android:id="@+id/tvDesc"
                 style="?attr/textAppearanceBodyMedium"
@@ -102,7 +107,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <!-- 可选：热门曲目/链接等信息（存在再显示即可） -->
+            <!-- Optional field: popular track (only visible if data is provided) -->
             <TextView
                 android:id="@+id/tvPopularTrack"
                 style="?attr/textAppearanceBodySmall"
@@ -116,6 +121,7 @@
     </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
 

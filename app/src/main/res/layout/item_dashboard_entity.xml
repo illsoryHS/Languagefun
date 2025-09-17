@@ -14,7 +14,7 @@
         android:orientation="vertical"
         android:padding="12dp">
 
-        <!-- Album Title -->
+        <!-- Album title (primary text) -->
         <TextView
             android:id="@+id/tvAlbumTitle"
             android:layout_width="match_parent"
@@ -24,7 +24,7 @@
             android:textStyle="bold"
             android:textColor="@android:color/black" />
 
-        <!-- Artist Name -->
+        <!-- Artist name (secondary text) -->
         <TextView
             android:id="@+id/tvArtistName"
             android:layout_width="match_parent"
@@ -34,13 +34,14 @@
             android:textColor="@android:color/darker_gray"
             android:layout_marginTop="4dp"/>
 
-        <!-- Extra Info Row -->
+        <!-- Row with release year, genre, and track count -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="6dp">
 
+            <!-- Release year -->
             <TextView
                 android:id="@+id/tvReleaseYear"
                 android:layout_width="wrap_content"
@@ -49,6 +50,7 @@
                 android:textSize="13sp"
                 android:textColor="@android:color/black" />
 
+            <!-- Separator dot -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -56,6 +58,7 @@
                 android:textSize="13sp"
                 android:textColor="@android:color/darker_gray" />
 
+            <!-- Genre -->
             <TextView
                 android:id="@+id/tvGenre"
                 android:layout_width="wrap_content"
@@ -64,6 +67,7 @@
                 android:textSize="13sp"
                 android:textColor="@android:color/black" />
 
+            <!-- Separator dot -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -71,6 +75,7 @@
                 android:textSize="13sp"
                 android:textColor="@android:color/darker_gray" />
 
+            <!-- Track count -->
             <TextView
                 android:id="@+id/tvTrackCount"
                 android:layout_width="wrap_content"
@@ -80,7 +85,7 @@
                 android:textColor="@android:color/black" />
         </LinearLayout>
 
-        <!-- Popular Track -->
+        <!-- Popular track (optional field, highlighted in blue) -->
         <TextView
             android:id="@+id/tvPopularTrack"
             android:layout_width="match_parent"
@@ -91,3 +96,4 @@
             android:layout_marginTop="6dp"/>
     </LinearLayout>
 </androidx.cardview.widget.CardView>
+

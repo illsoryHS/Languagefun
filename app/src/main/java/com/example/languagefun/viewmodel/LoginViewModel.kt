@@ -18,11 +18,6 @@ class LoginViewModel @Inject constructor(
     private val _uiState = MutableStateFlow<LoginUiState>(LoginUiState.Idle)
     val uiState: StateFlow<LoginUiState> = _uiState.asStateFlow()
 
-    /**
-     * campus: "footscray" | "sydney" | "br"
-     * username: 你的英文名
-     * password: 学号（不带 s）
-     */
     fun login(campus: String, username: String, password: String) {
         _uiState.value = LoginUiState.Loading
         viewModelScope.launch {

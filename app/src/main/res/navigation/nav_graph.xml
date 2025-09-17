@@ -1,36 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  nav_graph.xml
+
+  Purpose:
+    Defines the navigation flow of the app using the Jetpack Navigation Component.
+    Screens:
+      - LoginFragment → DashboardFragment → DetailsFragment
+    Arguments:
+      - keypass: Passed from Login to Dashboard
+      - entity: Passed from Dashboard to Details
+-->
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
     app:startDestination="@id/loginFragment">
 
+    <!-- Login screen -->
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.languagefun.LoginFragment"
         android:label="Login">
+        <!-- Navigate from Login to Dashboard -->
         <action
             android:id="@+id/action_login_to_dashboard"
             app:destination="@id/dashboardFragment" />
     </fragment>
 
+    <!-- Dashboard screen -->
     <fragment
         android:id="@+id/dashboardFragment"
         android:name="com.example.languagefun.DashboardFragment"
         android:label="Dashboard">
+
+        <!-- Argument passed from LoginFragment (keypass for API calls) -->
         <argument
             android:name="keypass"
             app:argType="string" />
+
+        <!-- Navigate from Dashboard to Details -->
         <action
             android:id="@+id/action_dashboard_to_details"
             app:destination="@id/detailsFragment" />
     </fragment>
 
+    <!-- Details screen -->
     <fragment
         android:id="@+id/detailsFragment"
         android:name="com.example.languagefun.DetailsFragment"
         android:label="Details">
+
+        <!-- Argument passed from DashboardFragment (selected entity object) -->
         <argument
             android:name="entity"
             app:argType="com.example.languagefun.data.remote.dto.DashboardEntityDto" />
     </fragment>
 </navigation>
+

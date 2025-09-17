@@ -18,25 +18,28 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
+// Unit tests for DashboardViewModel.
+// Uses MockK to mock repository calls and kotlinx-coroutines-test to control coroutine execution.
 class DashboardViewModelTest {
 
     @get:Rule
-    val mainDispatcherRule = MainDispatcherRule(StandardTestDispatcher())
+    val mainDispatcherRule = MainDispatcherRule(StandardTestDispatcher()) // Replace main dispatcher for testing
 
     @MockK
-    lateinit var repo: Nit3213Repository
+    lateinit var repo: Nit3213Repository // Mocked repository
 
-    private lateinit var vm: DashboardViewModel
+    private lateinit var vm: DashboardViewModel // System under test (SUT)
 
     @Before
     fun setup() {
+        // Initialize MockK annotations and create ViewModel with mocked repo
         MockKAnnotations.init(this)
         vm = DashboardViewModel(repo)
     }
 
     @Test
     fun getDashboard_success_emitsSuccess() = runTest {
-        // Given
+        // Given: Repository returns a successful DashboardResponse with 2 entities
         val list = listOf(
             DashboardEntityDto(
                 albumTitle = "Random Access Memories",
@@ -60,11 +63,11 @@ class DashboardViewModelTest {
         coEvery { repo.getDashboard("myTopic") } returns
                 Result.success(DashboardResponse(entities = list, entityTotal = list.size))
 
-        // When
+        // When: loadDashboard is called
         vm.loadDashboard("myTopic")
-        advanceUntilIdle()
+        advanceUntilIdle() // Ensure coroutines complete
 
-        // Then
+        // Then: State should be Success with correct data
         val state = vm.uiState.value
         require(state is DashboardUiState.Success)
         assertEquals(2, state.total)
@@ -74,15 +77,15 @@ class DashboardViewModelTest {
 
     @Test
     fun getDashboard_failure_emitsError() = runTest {
-        // Given
+        // Given: Repository returns a failure with an exception message
         coEvery { repo.getDashboard("badKey") } returns
                 Result.failure(IllegalStateException("Network error"))
 
-        // When
+        // When: loadDashboard is called with an invalid keypass
         vm.loadDashboard("badKey")
-        advanceUntilIdle()
+        advanceUntilIdle() // Ensure coroutines complete
 
-        // Then
+        // Then: State should be Error with correct error message
         val state = vm.uiState.value
         require(state is DashboardUiState.Error)
         assertEquals("Network error", state.message)

@@ -18,37 +18,34 @@ import com.example.languagefun.viewmodel.DashboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
-/**
- * DashboardFragment
- *
- * 1) 使用 keypass 拉取列表并展示（与 HomeActivity 相同逻辑）。
- * 2) 点击列表项跳到 DetailsFragment（Safe Args）。
- * 3) 布局：R.layout.fragment_home
- */
+// Fragment responsible for displaying the dashboard screen.
+// 1) Fetches and displays a list of entities using the keypass from login.
+// 2) Navigates to DetailsFragment when an item is clicked (via Safe Args).
+// 3) Uses the layout file: R.layout.fragment_home.
 @AndroidEntryPoint
 class DashboardFragment : Fragment(R.layout.fragment_home) {
 
-    private val vm: DashboardViewModel by viewModels()
-    private lateinit var recycler: RecyclerView
-    private lateinit var adapter: EntityAdapter
+    private val vm: DashboardViewModel by viewModels() // Injected ViewModel instance
+    private lateinit var recycler: RecyclerView        // RecyclerView for displaying entities
+    private lateinit var adapter: EntityAdapter        // Adapter for binding data to RecyclerView
 
-    // 从 Safe Args 获取 keypass（nav_graph.xml 已声明 <argument name="keypass" app:argType="string" />）
+    // Retrieve the keypass argument passed from LoginFragment (Safe Args)
     private val args: DashboardFragmentArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // RecyclerView + Adapter
+        // Initialize RecyclerView and Adapter
         recycler = view.findViewById(R.id.recyclerEntities)
         adapter = EntityAdapter(onClick = { entity ->
-            // 跳转到详情（Safe Args）
+            // Navigate to DetailsFragment using Safe Args, passing the clicked entity
             val action = DashboardFragmentDirections.actionDashboardToDetails(entity)
             findNavController().navigate(action)
         })
         recycler.layoutManager = LinearLayoutManager(requireContext())
         recycler.adapter = adapter
 
-        // 读取 keypass 并加载
+        // Load dashboard data using the provided keypass
         val keypass = args.keypass
         if (!keypass.isNullOrEmpty()) {
             vm.loadDashboard(keypass)
@@ -56,17 +53,17 @@ class DashboardFragment : Fragment(R.layout.fragment_home) {
             Toast.makeText(requireContext(), "Missing keypass", Toast.LENGTH_LONG).show()
         }
 
-        // 观察 UI 状态
+        // Observe the UI state and react to changes
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 vm.uiState.collect { state ->
                     when (state) {
-                        is DashboardUiState.Idle -> Unit
+                        is DashboardUiState.Idle -> Unit // No action
                         is DashboardUiState.Loading ->
                             Toast.makeText(requireContext(), "Loading dashboard...", Toast.LENGTH_SHORT).show()
 
                         is DashboardUiState.Success ->
-                            adapter.submitList(state.entities)
+                            adapter.submitList(state.entities) // Update RecyclerView with new data
 
                         is DashboardUiState.Error ->
                             Toast.makeText(requireContext(), state.message, Toast.LENGTH_LONG).show()
@@ -76,4 +73,5 @@ class DashboardFragment : Fragment(R.layout.fragment_home) {
         }
     }
 }
+
 
