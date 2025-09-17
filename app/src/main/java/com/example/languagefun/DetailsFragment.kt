@@ -3,8 +3,11 @@ package com.example.languagefun
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import androidx.core.view.isGone
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.appbar.MaterialToolbar
 import com.example.languagefun.data.remote.dto.DashboardEntityDto
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -12,13 +15,12 @@ import dagger.hilt.android.AndroidEntryPoint
  * DetailsFragment
  *
  * 展示从 Dashboard 传来的实体的完整信息。
- * 布局：R.layout.fragment_details
+ * 布局：R.layout.fragment_details（含 MaterialToolbar + NestedScrollView + Card）
  * 依赖：Navigation Component + Hilt
  */
 @AndroidEntryPoint
 class DetailsFragment : Fragment(R.layout.fragment_details) {
 
-    // 使用 Safe Args 接收传过来的 entity（已在 nav_graph 声明）
     private val args: DetailsFragmentArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -26,14 +28,41 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
 
         val entity: DashboardEntityDto? = args.entity
 
-        view.findViewById<TextView>(R.id.tvTitle).text    = entity?.albumTitle.orEmpty()
-        view.findViewById<TextView>(R.id.tvSubtitle).text = entity?.artistName.orEmpty()
-        view.findViewById<TextView>(R.id.tvDesc).text     = entity?.description.orEmpty()
+        // --- Toolbar：标题 + 返回键 ---
+        view.findViewById<MaterialToolbar>(R.id.toolbar)?.apply {
+            title = getString(R.string.details_title) // 建议在 strings.xml 新增 <string name="details_title">Details</string>
+            setNavigationIcon(com.google.android.material.R.drawable.ic_arrow_back_black_24)
+            setNavigationOnClickListener { findNavController().navigateUp() }
+        }
 
-        // 如果你的 fragment_details.xml 里还有其他字段（如流派/曲目数/热门曲目），可按需继续绑定：
-        // view.findViewById<TextView>(R.id.tvGenre).text        = entity?.genre.orEmpty()
-        // view.findViewById<TextView>(R.id.tvTracks).text       = entity?.trackCount?.let { "$it tracks" }.orEmpty()
-        // view.findViewById<TextView>(R.id.tvPopularTrack).text = entity?.popularTrack?.let { "Popular Track: $it" }.orEmpty()
+        // --- 视图引用 ---
+        val tvTitle        = view.findViewById<TextView>(R.id.tvTitle)
+        val tvSubtitle     = view.findViewById<TextView>(R.id.tvSubtitle)
+        val tvDesc         = view.findViewById<TextView>(R.id.tvDesc)
+        val tvGenre        = view.findViewById<TextView?>(R.id.tvGenre)
+        val tvTracks       = view.findViewById<TextView?>(R.id.tvTracks)
+        val tvPopularTrack = view.findViewById<TextView?>(R.id.tvPopularTrack)
+
+        // --- 主要字段 ---
+        tvTitle.text    = entity?.albumTitle.orEmpty()
+        tvSubtitle.text = entity?.artistName.orEmpty()
+        tvDesc.text     = entity?.description.orEmpty()
+
+        // --- 可选字段：判空隐藏，避免“占位的空行” ---
+        tvGenre?.bindTextOrGone(entity?.genre)
+        tvTracks?.bindTextOrGone(entity?.trackCount?.let { "$it tracks" })
+        tvPopularTrack?.bindTextOrGone(entity?.popularTrack?.let { "Popular Track: $it" })
+    }
+
+    // 小工具：空则 GONE，非空则显示文本
+    private fun TextView.bindTextOrGone(textOrNull: CharSequence?) {
+        if (textOrNull.isNullOrBlank()) {
+            isGone = true
+        } else {
+            isGone = false
+            text = textOrNull
+        }
     }
 }
+
 

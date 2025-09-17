@@ -49,6 +49,8 @@ dependencies {
     implementation(libs.androidx.activity.ktx)
     implementation(libs.androidx.constraintlayout)
 
+    implementation("com.google.android.material:material:1.13.0")
+
     // Hilt
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
