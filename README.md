@@ -4,7 +4,18 @@ An Android application developed as part of **NIT3213 – Mobile Application Dev
 The project demonstrates proficiency in **API integration, clean architecture, dependency injection (Hilt), RecyclerView usage, and unit testing**.
 
 ---
+## 🔧 Environment Setup
+To successfully build and run this project, please ensure the following environment:
 
+- JDK: 17
+
+- Gradle: 8.13
+
+- AGP: 8.13.0
+
+- Kotlin: 2.2.10
+
+---
 ## 📌 Features
 
 ### 1. Login Screen
@@ -26,7 +37,6 @@ The project demonstrates proficiency in **API integration, clean architecture, d
 - Designed following **Material Design 3 guidelines**.
 
 ---
-
 ## ⚙️ Technical Implementation
 
 - **Language:** Kotlin
@@ -38,7 +48,6 @@ The project demonstrates proficiency in **API integration, clean architecture, d
 - **Testing:** JUnit + MockK + Coroutine test library
 
 ---
-
 ## 🧪 Testing
 
 - Unit tests for **ViewModels** (LoginViewModel, DashboardViewModel) using **JUnit** and **MockK**.
@@ -47,42 +56,36 @@ The project demonstrates proficiency in **API integration, clean architecture, d
   app/src/test/java/com/example/languagefun/
 
 ---
-
 ## 📁 Project Structure
-
-LanguageFun/
-│── app/
-│ ├── src/main/java/com/example/languagefun/
-│ │ ├── ui/ # Fragments & Activities
-│ │ ├── data/ # DTOs, repositories
-│ │ ├── di/ # Hilt modules
-│ │ └── viewmodel/ # ViewModels
-│ ├── res/ # Layout XML, drawables, strings
-│ └── AndroidManifest.xml
-│── build.gradle
-│── README.md
-
-
+```plaintext
+LanguageFun/                           # Root directory of the Android project
+├── .gradle/                           # Gradle build cache and related files
+├── .idea/                             # Android Studio project settings
+├── app/                               # Main Android app module
+│   ├── src/                           # Source code and resources
+│   │   ├── main/                      # Main source set
+│   │   │   ├── AndroidManifest.xml    # App manifest
+│   │   │   ├── java/com/example/...   # Kotlin source code
+│   │   │   └── res/                   # Layouts, drawables, values
+│   │   └── test/                      # Unit tests
+│   └── build.gradle                   # Module-level Gradle config
+├── build.gradle                       # Project-level Gradle config
+├── settings.gradle                    # Declares project modules
+└── gradle/                            # Gradle wrapper files
+```
 ---
-
 ## 🚀 How to Run
 
-### Prerequisites
-- Android Studio Ladybug (or newer)
-- JDK 17+
-- Minimum SDK: 24 (Android 7.0)
-
-### Steps
 1. Clone the repository:
    ```bash
    git clone https://github.com/illsoryHS/Languagefun/tree/feat/di-and-network
-    cd Languagefun
+   cd Languagefun
     ```
 2. Open the project in Android Studio.
 
 3. Sync Gradle to install dependencies.
 
-4. Run the app on an emulator or physical device.
+4. Run the app on an emulator.
 
 5. Login using:
 
@@ -91,22 +94,23 @@ LanguageFun/
 - Password: 8115345
 
 ---
+## 🛠️ API Reference
 
-🛠️ API Reference
-
-Base URL: https://nit3213api.onrender.com/
-
-Authentication
-
+- Base URL: 
+```plaintext
+https://nit3213api.onrender.com/
+```
+- Authentication
+```plaintext
 POST /{footscray}/auth
 Body:
 {
 "username": "Allen",
 "password": "8115345"
 }
-
-Dashboard
-
+```
+- Dashboard
+```plaintext
 GET /dashboard/{keypass}
 Response:
 {
@@ -119,9 +123,9 @@ Response:
 ],
 "entityTotal": 7
 }
-
+```
 ---
-Author
+## Author
 
 Developed by Allen Li
 For NIT3213 – Mobile Application Development final assessment at Victoria University.
