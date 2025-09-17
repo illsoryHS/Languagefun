@@ -2,7 +2,9 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     kotlin("kapt")
+    id("kotlin-parcelize")
     alias(libs.plugins.hilt.android)
+    alias(libs.plugins.navigation.safeargs)
 }
 
 android {
@@ -39,22 +41,22 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
+
+
     implementation(libs.androidx.activity.ktx)
     implementation(libs.androidx.constraintlayout)
-    implementation(libs.androidx.activity)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+
+    // Hilt
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
+
+    // Kotlinx / Lifecycle
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.lifecycle.viewmodel.ktx)
     implementation(libs.lifecycle.runtime.ktx)
-
 
     // Retrofit + Gson
     implementation(libs.retrofit)
@@ -63,13 +65,19 @@ dependencies {
     // OkHttp
     implementation(libs.okhttp.logging)
 
+    // Navigation Component
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
+
     // Testing
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+
     testImplementation("io.mockk:mockk:1.13.12")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1")
-    // --- Robolectric for adapter/view inflation in unit tests ---
     testImplementation("org.robolectric:robolectric:4.12.1")
     testImplementation("androidx.test:core:1.5.0")
-
 }
 
 kapt {

@@ -9,7 +9,7 @@ class DetailsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_details)
+        setContentView(R.layout.fragment_details)
 
         val entity = intent.getSerializableExtra("entity") as? DashboardEntityDto
 

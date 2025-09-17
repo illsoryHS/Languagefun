@@ -10,7 +10,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.languagefun.data.remote.dto.DashboardEntityDto
 import com.example.languagefun.ui.dashboard.EntityAdapter
 import com.example.languagefun.viewmodel.DashboardUiState
 import com.example.languagefun.viewmodel.DashboardViewModel
@@ -26,7 +25,7 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+        setContentView(R.layout.fragment_home)
 
         recycler = findViewById(R.id.recyclerEntities)
         adapter = EntityAdapter(onClick = { entity ->

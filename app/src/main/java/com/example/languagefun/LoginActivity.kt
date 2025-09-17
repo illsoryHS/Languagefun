@@ -28,7 +28,7 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        setContentView(R.layout.fragment_login)
 
         // 1) 拿到输入框和按钮
         val etUsername: EditText = findViewById(R.id.emailEditText)     // ← 如果你的 id 不是这个，请改成你的
